@@ -27,7 +27,7 @@ import java.util.Properties;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
-@Listeners({Listener.class})
+@Listeners({Listener.class,ScreenShooter.class})
 public class TestBase {
     public static String logName;
     public static Properties config = null;
@@ -45,8 +45,8 @@ public class TestBase {
         System.setProperty("webdriver.chrome.driver", "src//main//resources//chromedriver.exe");
         System.setProperty("selenide.browser", "Chrome");
         Configuration.startMaximized=true;
-        Configuration.screenshots=true;
         ScreenShooter.captureSuccessfulTests=false;//设为true时，不管用例成功失败都截图，false时，只有失败时才会截图
+        Configuration.reportsFolder = "screenshot";//设置错误截图和selenide测试结果存放路径为：根目录下的screenshot文件夹
 
         initConfig();
         initLogger();
